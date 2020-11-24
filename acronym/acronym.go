@@ -1,15 +1,36 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package acronym should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+/*
+Package acronym implements utility routines
+ generating acronyms.
+*/
 package acronym
 
-// Abbreviate should have a comment documenting it.
+import (
+		"strings"
+		"unicode"
+	)
+
+func filter(s []string, test func(string) bool) (sFiltered []string) {
+	for _, se := range s {
+		if test(se) {
+			sFiltered = append(sFiltered, se)
+		}
+	}
+	return
+}
+
+func mapf(s []string, mapper func(string) string) (sMapped []string) {
+	for _, se := range s {
+		sMapped = append(sMapped, mapper(se))
+	}
+	return
+}
+
+// Abbreviate returns the acronym corresponding to string s.
 func Abbreviate(s string) string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return ""
+	nonWordsChars := func(c rune) bool {
+			return !unicode.IsLetter(c) && (c != '\'') && !unicode.IsNumber(c)
+		}
+	words := filter(strings.FieldsFunc(s, nonWordsChars), func(ss string) bool { return ss != "" })
+	initials := mapf(words, func(ss string) string { return strings.ToUpper(ss[:1]) })
+	return strings.Join(initials, "")
 }
