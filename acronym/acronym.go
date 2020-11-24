@@ -27,10 +27,10 @@ func mapf(s []string, mapper func(string) string) (sMapped []string) {
 
 // Abbreviate returns the acronym corresponding to string s.
 func Abbreviate(s string) string {
-	nonWordsChars := func(c rune) bool {
+	nonWordChars := func(c rune) bool {
 			return !unicode.IsLetter(c) && (c != '\'') && !unicode.IsNumber(c)
 		}
-	words := filter(strings.FieldsFunc(s, nonWordsChars), func(ss string) bool { return ss != "" })
+	words := filter(strings.FieldsFunc(s, nonWordChars), func(ss string) bool { return ss != "" })
 	initials := mapf(words, func(ss string) string { return strings.ToUpper(ss[:1]) })
 	return strings.Join(initials, "")
 }
