@@ -46,8 +46,8 @@ func init() {
 		}
 	opiesInit()
 	opiesMap = func(planet Planet) float64 {
-		return opies[planet]
-	}
+			return opies[planet]
+		}
 }
 
 // Age returns,
