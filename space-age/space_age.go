@@ -26,25 +26,29 @@ const eyis float64 = 365.25 * 24 * 60 * 60;
 //  the orbital period in Earth years of this planet
 //  per the duration of one Earth year in seconds.
 // Impl. note: const map.
-var opiesMap = func() map[Planet]float64 {
-		return map[Planet]float64{
-				"Mercury":   0.2408467  * eyis,
-				"Venus":     0.61519726 * eyis,
-				"Earth":     1.0        * eyis,
-				"Mars":      1.8808158  * eyis,
-				"Jupiter":  11.862615   * eyis,
-				"Saturn":   29.447498   * eyis,
-				"Uranus":   84.016846   * eyis,
-				"Neptune": 164.79132    * eyis,
+var opies = map[Planet]float64{}
+func init() {
+	var opiey = map[Planet]float64{
+			"Mercury":   0.2408467,
+			"Venus":     0.61519726,
+			"Earth":     1.0,
+			"Mars":      1.8808158,
+			"Jupiter":  11.862615,
+			"Saturn":   29.447498,
+			"Uranus":   84.016846,
+			"Neptune": 164.79132,
+		}
+	var opiesInit = func() {
+			for k, v := range opiey {
+				opies[k] = v * eyis
 			}
-	}
-func opies(planet Planet) float64 {
-	return opiesMap()[planet]
+		}
+	opiesInit()
 }
 
 // Age returns,
 //  given the age of someone in seconds, and a planet,
 //  how old this someone would be in years on this planet.
 func Age(seconds float64, planet Planet) float64 {
-	return seconds / opies(planet);
+	return seconds / opies[planet];
 }
