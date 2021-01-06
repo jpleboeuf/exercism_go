@@ -37,7 +37,7 @@ func Convert(number int) string {
         raindropSounds := make([]string, 0, len(rsConvTbl))
         for _, rscti := range rsConvTbl {
                 if hasFactor(number, rscti.factor) {
-                    raindropSounds = append(raindropSounds, rscti.sound)
+                        raindropSounds = append(raindropSounds, rscti.sound)
                 }
         }
         if len(raindropSounds) == 0 {
