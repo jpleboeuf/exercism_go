@@ -36,10 +36,9 @@ func init() {
 }
 
 // Score returns the Scrabble score for word.
-func Score(word string) int {
-        var sum int = 0
+func Score(word string) (score int) {
         for _, c := range word {
-                sum += letterValueMap(unicode.ToUpper(c))
+                score += letterValueMap(unicode.ToUpper(c))
         }
-        return sum
+        return
 }
